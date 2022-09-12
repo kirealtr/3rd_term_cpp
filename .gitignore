@@ -1,0 +1,8 @@
+*.metadata
+*.json
+*.o
+*.exe
+*.txt
+/.vscode
+*.py
+/.vs
