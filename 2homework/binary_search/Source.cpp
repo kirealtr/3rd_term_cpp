@@ -34,9 +34,11 @@ int main() {
       ss << str;
       ss >> elem;
     }
-    else
+    else {
+      arr.clear();
+      arr.shrink_to_fit();
       return 0;
-      
+    }
 
     if (VecBinSearch(arr, elem))
       cout << "Your array contains " << elem << endl;

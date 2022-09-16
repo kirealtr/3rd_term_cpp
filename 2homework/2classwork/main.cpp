@@ -2,44 +2,51 @@
 
 using namespace std;
 
-const int m = 3, n = 3;
-double* ext_matrix[m];
+//const int m = 3, n = 3;
 
-void swap_str(int i, int j) {
-  double* tmp = ext_matrix[i];
-  ext_matrix[i] = ext_matrix[j];
-  ext_matrix[j] = tmp;
+void swap_row(int i, int j, double **dim2_arr) {
+  double* tmp = dim2_arr[i];
+  dim2_arr[i] = dim2_arr[j];
+  dim2_arr[j] = tmp;
 }
 
 int main() {
+  int m, n;
+  cout << "Enter size of a square matrix: ";
+  cin >> n;
+  m = n;
+  cout << "Enter matrix elements" << endl;
+
+  double** ext_matrix = new double* [m];
+
   for (int i = 0; i < m; i++) {
     ext_matrix[i] = new double[n + 1];
     for (int j = 0; j < n + 1; j++) {
-      cout << "string " << i << ", column " << j << ": ";
+      cout << "row " << i << ", column " << j << ": ";
       cin >> ext_matrix[i][j];
     }
   }
 
   for (int col = 0; col < n; col++) {
-    int str;
+    int row;
     
-    for (str = col; str < m; str++) {
-      if (ext_matrix[str][col])
+    for (row = col; row < m; row++) {
+      if (ext_matrix[row][col])
         break;
     }
-    if (str >= m) {
+    if (row >= m) {
       cout << "System has infinite number of solutions";
       exit(0);
     }
     
-    swap_str(str, col);
+    swap_row(row, col, ext_matrix);
 
-    for (str = 0; str < m; str++) {
-      if (str == col)
+    for (row = 0; row < m; row++) {
+      if (row == col)
         continue;
-      double k = ext_matrix[str][col] / ext_matrix[col][col];
+      double k = ext_matrix[row][col] / ext_matrix[col][col];
       for (int j = col; j < n + 1; j++)
-        ext_matrix[str][j] -= ext_matrix[col][j] * k;
+        ext_matrix[row][j] -= ext_matrix[col][j] * k;
     }
     double t = ext_matrix[col][col];
     for (int j = col; j < n + 1; j++)
@@ -47,7 +54,10 @@ int main() {
 
   }
 
-  for (int str = 0; str < m; str++) {
-    cout << "x" << str << " = " << ext_matrix[str][n] << endl;
+  for (int row = 0; row < m; row++) {
+    cout << "x" << row << " = " << ext_matrix[row][n] << endl;
+    delete[] ext_matrix[row];
   }
+
+  delete[] ext_matrix;
 }

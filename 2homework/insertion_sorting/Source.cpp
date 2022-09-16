@@ -22,6 +22,9 @@ int main() {
   VecInsSort(arr);
   cout << "Array after sorting:  ";
   VecPrint(arr);
+
+  arr.clear();
+  arr.shrink_to_fit();
 }
 
 void VecInsSort(vector <int> &vec) {
