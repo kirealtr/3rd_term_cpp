@@ -8,7 +8,7 @@ void f(int i, ...) {
   cout << "int i = " << i << endl;
 }
 
-void f(double d, int i) {
+void f(char d, int i) {
   d = pow(d, 4);
   i *= 2;
   cout << "double d = " << d << endl;
