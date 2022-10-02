@@ -62,13 +62,22 @@ public:
   }
   //Output in different forms
   void PrintAlgF(int prec = precision_) {
-    cout << setprecision(prec) << re_ << " + i*" << im_ << endl;
+    if (!mod_)
+      cout << 0 << endl;
+    else
+      cout << setprecision(prec) << re_ << " + i*" << im_ << endl;
   }
   void PrintTrigF(int prec = precision_) {
-    cout << setprecision(prec) << mod_ << "*(cos" << arg_ << " + sin" << arg_ << ')' << endl;
+    if (!mod_)
+      cout << 0 << endl;
+    else
+      cout << setprecision(prec) << mod_ << "*(cos" << arg_ << " + sin" << arg_ << ')' << endl;
   }
   void PrintExpF(int prec = precision_) {
-    cout << setprecision(prec) << mod_ << "*exp(i*" << arg_ << ')' << endl;
+    if (!mod_)
+      cout << 0 << endl;
+    else
+      cout << setprecision(prec) << mod_ << "*exp(i*" << arg_ << ')' << endl;
   }
   //Arithmetical operations
   Complex Add(double operand) {
