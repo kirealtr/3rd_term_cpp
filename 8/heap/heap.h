@@ -24,7 +24,7 @@ public:
   int GetSize(void) { return size_; }
   T GetElem(int index) { return cont_[index]; }
   T ExtractMax(void); // returns deleted element
-  ~Heap(void) { delete cont_; }
+  ~Heap(void) { delete[] cont_; }
 };
 
 template <typename T>
@@ -78,7 +78,7 @@ int Heap<T>::Add(T elem) {
     used_mem_ *= 2;
     for (int i = 0; i < size_; i++)
       cont_[i] = tmp[i];
-    delete tmp;
+    delete[] tmp;
   }
 
   cont_[size_] = elem;

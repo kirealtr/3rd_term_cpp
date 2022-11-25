@@ -526,4 +526,15 @@ protected ведет себя как private, но в отличии от privat
 	template <typename T>
 	void f() {
 		base<T>::der<1, 2> a; // ошибка
+		typename base<T>::template der<1, 2> a; // успех
+	}
+
+# Метапрограммирование
+
+	void Print() {}
+
+	template<typename Head, typename... Tail> // вариативный шаблон
+	void Print(const Head& head, const Tail&... tail) {
+		cout << head << endl;
+		Print(tail...); // рекурсивное инстанциирование шаблона
 	}

@@ -60,8 +60,8 @@ public:
   }
 
   ~Polygon(void) {
-    delete vert_coord_;
-    delete sides_;
+    delete[] vert_coord_;
+    delete[] sides_;
   }
 };
 
