@@ -19,6 +19,11 @@ struct Decay<T&> {
 };
 
 template<typename T>
+struct Decay<T&&> {
+  using type = typename Decay<T>::type;
+};
+
+template<typename T>
 struct Decay<const T> {
   using type = typename Decay<T>::type;
 };
@@ -28,7 +33,18 @@ struct Decay<array<T, n>> {
   using type = typename Decay<T>::type;
 };
 
+template<typename T, typename... Args>
+struct Decay<T(Args ...)> {
+  using type = typename Decay<T>::type;
+};
+
+template<typename T, typename... Args>
+struct Decay<T(Args ..., ...)> {
+  using type = typename Decay<T>::type;
+};
+
 int main() {
-  cout << is_same_v<Decay<int***>::type, int> << endl;
-  cout << is_same_v<Decay<array<const string***, 15>>::type, string> << endl;
+  cout << is_same_v<Decay<int&&>::type, int> << endl;
+  cout << is_same_v<Decay<decltype(main)>::type, int> << endl;
+  cout << is_same_v<Decay<array<const string******, 15>>::type, string> << endl;
 }
